@@ -64,6 +64,11 @@ class Bullet {
     }
 
     shoot() {
-        this.y -= 10;
+        this.y -= 0.01;
+    }
+
+    clearBullet() {
+        this.ctx.clearRect(0, 0, this.w, this.h);
+        // this.beginPath()
     }
 }
