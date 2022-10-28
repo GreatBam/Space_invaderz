@@ -18,7 +18,23 @@ class Shuttle {
         this.ctx.fill()
     }
 
-    borderCollision() {
-        
+    moveRight() {
+        this.x += 10;
+    }
+    moveLeft() {
+        this.x -= 10;
+    }
+    moveUp() {
+        this.y -= 10;
+    }
+    moveDown() {
+        this.y += 10;
+    }
+
+    borderCollision(w, h) {
+        if((this.x + this.w) >= w) this.x -= 10;
+        if(this.x <= 0) this.x += 10;
+        if((this.y + this.h) >= h) this.y -= 10;
+        if(this.y <= 0) this.y += 10;
     }
 }
