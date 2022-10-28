@@ -37,6 +37,15 @@ class Player {
         if((this.y + this.h) >= h) this.y -= 10;
         if(this.y <= 0) this.y += 10;
     }
+
+    move() {
+        this.x += this.dirX;
+    }
+
+    alienPath(w) {
+        if((this.x + this.w) >= w) this.dirX = -this.dirX;
+        if(this.x <= 0) this.dirX = -this.dirX;
+    }
 }
 
 class Bullet {

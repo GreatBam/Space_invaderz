@@ -4,7 +4,7 @@ let shot = false;
 
 const shuttle = new Player(ctx, 220, 400, 50, 50, 0, 0, "blue");
 let bullet = new Bullet(ctx, 0, 0, 10, 10);
-const alien = new Player(ctx, 220, 80, 50, 50, 0, 0, "red")
+const alien = new Player(ctx, 220, 80, 50, 50, 2, 0, "red")
 
 function timeStamp() {
     return timer;
@@ -50,6 +50,8 @@ function gameLoop() {
     shuttle.draw();
     shuttle.borderCollision(canvas.clientWidth, canvas.height);
     alien.draw();
+    alien.move();
+    alien.alienPath(canvas.width);
     while(shot) {
         bullet.draw();
         bullet.shoot();
