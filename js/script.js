@@ -5,7 +5,7 @@ let shot = false;
 const shuttle = new Player(ctx, 220, 400, 50, 50, 0, 0, "blue");
 let bulletx = (shuttle.x + shuttle.w/2);
 let bullety = shuttle.y;
-const bullet = new Bullet(ctx, bulletx, bullety, 10, 10, 0, 0, "black");
+let bullet = new Bullet(ctx, bulletx, bullety, 10, 10, 0, 0, "black");
 
 function clear() {
     ctx.beginPath();
@@ -32,6 +32,10 @@ function playerControl(e) {
             break;
         case 32:
             shot = true;
+            let bulletx = (shuttle.x + shuttle.w/2);
+            let bullety = shuttle.y;
+            bullet = new Bullet(ctx, bulletx, bullety, 10, 10, 0, 0, "black");
+            // bullet = new Bullet(ctx, bulletx, bullety, 10, 10, 0, 0, "black");
             break;
     }
 }
@@ -40,15 +44,20 @@ window.requestAnimationFrame(gameLoop);
 
 function gameLoop() {
     clear();
+    // let bulletx = (shuttle.x + shuttle.w/2);
+    // let bullety = shuttle.y;
+    // bullet = new Bullet(ctx, bulletx, bullety, 10, 10, 0, 0, "black");
     window.addEventListener("keydown", playerControl, false);
     shuttle.draw();
     shuttle.borderCollision(canvas.clientWidth, canvas.height);
     while(shot) {
         bullet.draw()
-        bullet.shoot()
+        // bullet.shoot()
         if(bullet.y <= 0) {
             shot = false;
-            bullet.clearBullet()
+            // let bulletx = (shuttle.x + shuttle.w/2);
+            // let bullety = shuttle.y;
+            // bullet.clearBullet(bulletx, bullety)
         }
     }
     window.requestAnimationFrame(gameLoop);

@@ -18,10 +18,6 @@ class Player {
         this.ctx.fill()
     }
 
-    shoot() {
-        this.y += 10;
-    }
-
     moveRight() {
         this.x += 10;
     }
@@ -57,6 +53,7 @@ class Bullet {
 
     draw() {
         this.ctx.beginPath();
+        this.y -= 0.1;
         this.ctx.rect(this.x, this.y, this.w, this.h);
         this.ctx.fillStyle = this.fill;
         this.ctx.stroke();
@@ -64,11 +61,11 @@ class Bullet {
     }
 
     shoot() {
-        this.y -= 0.01;
+        this.y -= 1;
     }
 
-    clearBullet() {
-        this.ctx.clearRect(0, 0, this.w, this.h);
+    clearBullet(x, y) {
+        this.ctx.clearRect(x, y, this.w, this.h);
         // this.beginPath()
     }
 }
