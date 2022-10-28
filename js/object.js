@@ -40,28 +40,24 @@ class Player {
 }
 
 class Bullet {
-    constructor(ctx, x, y, h, w, dirX, dirY, fill) {
+    constructor(ctx, x, y, h, w) {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.dirX = dirX;
-        this.dirY = dirY;
-        this.fill = fill;
     }
 
     draw() {
         this.ctx.beginPath();
-        this.y -= 0.1;
         this.ctx.rect(this.x, this.y, this.w, this.h);
-        this.ctx.fillStyle = this.fill;
+        this.ctx.fillStyle = "black";
         this.ctx.stroke();
         this.ctx.fill()
     }
 
     shoot() {
-        this.y -= 1;
+        this.y -= 40;
     }
 
     clearBullet(x, y) {
