@@ -3,12 +3,8 @@ let ctx = canvas.getContext("2d");
 let shot = false;
 
 const shuttle = new Player(ctx, 220, 400, 50, 50, 0, 0, "blue");
-let bullet = new Bullet(ctx, 0, 0, 10, 10);
+let bullet = new Bullet(ctx, 0, 0, 7);
 const alien = new Player(ctx, 220, 80, 50, 50, 2, 0, "red")
-
-function timeStamp() {
-    return timer;
-}
 
 function clear() {
     ctx.beginPath();
@@ -34,11 +30,22 @@ function playerControl(e) {
             shuttle.moveDown();
             break;
         case 32:
-            let bulletx = (shuttle.x + ((shuttle.w/2)-5));
-            let bullety = (shuttle.y-bullet.h);
-            bullet = new Bullet(ctx, bulletx, bullety, 10, 10);
-            shot = true;
+            if(shot == false){
+                let bulletx = (shuttle.x + ((shuttle.w/2)-5));
+                let bullety = (shuttle.y-bullet.r);
+                bullet = new Bullet(ctx, bulletx, bullety, 7);
+                shot = true;
+            }
             break;
+    }
+}
+
+function hit() {
+    if(bullet.x <= (alien.x + alien.w) &&
+    (bullet.x + bullet.w) >= alien.x &&
+    bullet.y <= (alien.y + alien.h) &&
+    (bullet.y + bullet.h) >= alien.y) {
+        shot = false;
     }
 }
 
@@ -48,16 +55,17 @@ function gameLoop() {
     clear();
     window.addEventListener("keydown", playerControl, false);
     shuttle.draw();
-    shuttle.borderCollision(canvas.clientWidth, canvas.height);
+    shuttle.borderCollision(canvas.width, canvas.height);
     alien.draw();
     alien.move();
     alien.alienPath(canvas.width);
-    while(shot) {
+    if(shot == true) {
         bullet.draw();
         bullet.shoot();
         if(bullet.y < 0) {
             shot = false;
         }
     }
+    hit();
     window.requestAnimationFrame(gameLoop);
 }

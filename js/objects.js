@@ -19,16 +19,16 @@ class Player {
     }
 
     moveRight() {
-        this.x += 10;
+        this.x += 20;
     }
     moveLeft() {
-        this.x -= 10;
+        this.x -= 20;
     }
     moveUp() {
-        this.y -= 10;
+        this.y -= 20;
     }
     moveDown() {
-        this.y += 10;
+        this.y += 20;
     }
 
     borderCollision(w, h) {
@@ -49,28 +49,23 @@ class Player {
 }
 
 class Bullet {
-    constructor(ctx, x, y, h, w) {
+    constructor(ctx, x, y, r) {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
+        this.r = r;
     }
 
     draw() {
         this.ctx.beginPath();
-        this.ctx.rect(this.x, this.y, this.w, this.h);
+        this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         this.ctx.fillStyle = "black";
         this.ctx.stroke();
         this.ctx.fill()
     }
 
     shoot() {
-        this.y -= 40;
+        this.y -= 5;
     }
 
-    clearBullet(x, y) {
-        this.ctx.clearRect(x, y, this.w, this.h);
-        // this.beginPath()
-    }
 }
