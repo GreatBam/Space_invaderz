@@ -1,5 +1,6 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+let playerDeath = false;
 
 function colorRNG() {
     letter = "0123456789abcdef";
@@ -10,7 +11,7 @@ function colorRNG() {
     return color;
 }
 
-const shuttle = new Player(ctx, 220, 400, 50, 50);
+const player = new Player(ctx, 220, 400, 50, 50);
 const aliens = [
     alien = new Alien(ctx, 75, 70, 50, 50, 5000, colorRNG()),
     alien = new Alien(ctx, 175, 70, 50, 50, 10000, colorRNG()),
@@ -31,20 +32,20 @@ function clear() {
 function playerControl(e) {
     switch(e.keyCode) {
         case 37:
-            shuttle.moveLeft();
+            player.moveLeft();
             break;
         case 39:
-            shuttle.moveRight();
+            player.moveRight();
             break;
         case 38:
-            shuttle.moveUp();
+            player.moveUp();
             break;
         case 40:
-            shuttle.moveDown();
+            player.moveDown();
             break;
         case 32:
-            let bulletx = (shuttle.x + (shuttle.w / 2));
-            let bullety = shuttle.y - 7;
+            let bulletx = (player.x + (player.w / 2));
+            let bullety = player.y - 7;
             const bullet = new Bullet(ctx, bulletx, bullety, 7);
             bullets.push(bullet);
             break;
@@ -56,10 +57,15 @@ window.requestAnimationFrame(gameLoop);
 function gameLoop() {
     clear();
     window.addEventListener("keydown", playerControl, false);
-    shuttle.draw();
-    shuttle.borderCollision(canvas.width, canvas.height);
-    for(ammo of bullets) {
-        ammo.draw();
+    player.draw();
+    player.borderCollision(canvas.width, canvas.height);
+    for(let alien of aliens) {
+        alien.draw();
+        alien.move();
+        player.hitByAlien(alien);
+        for(let ammo of bullets) {
+            ammo.draw();
+        }
     }
         window.requestAnimationFrame(gameLoop);
 }

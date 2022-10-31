@@ -21,6 +21,8 @@ class Player {
     }
     
     draw() {
+        if(playerDeath == true) return
+
         this.ctx.beginPath();
         this.ctx.rect(this.x, this.y, this.w, this.h);
         this.ctx.fillStyle = "green";
@@ -33,6 +35,17 @@ class Player {
         if(this.x <= 0) this.x += 10;
         if((this.y + this.h) >= h) this.y -= 10;
         if(this.y <= 0) this.y += 10;
+    }
+
+    hitByAlien(alien) {
+        if(
+            alien.x < (this.x + this.w) &&
+            (alien.x + alien.w) > this.x &&
+            alien.y < (this.y + this.h) &&
+            (alien.y + alien.h) > this.y
+        ) {
+            playerDeath = true;
+        }
     }
 }
 
@@ -55,20 +68,10 @@ class Alien {
         this.ctx.fill()
     }
 
-    borderCollision(w, h) {
-        if((this.x + this.w) >= w) this.x -= 10;
-        if(this.x <= 0) this.x += 10;
-        if((this.y + this.h) >= h) this.y -= 10;
-        if(this.y <= 0) this.y += 10;
-    }
-
     move() {
-        this.x += this.dirX;
-    }
-
-    alienPath(w) {
-        if((this.x + this.w) >= w) this.dirX = -this.dirX;
-        if(this.x <= 0) this.dirX = -this.dirX;
+        setInterval(() => {
+            this.y += 10;
+        }, this.timeStamp);
     }
 }
 
@@ -81,11 +84,13 @@ class Bullet {
     }
 
     draw() {
-        this.ctx.beginPath();
-        this.y -= 10;
-        this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-        this.ctx.fillStyle = "black";
-        this.ctx.stroke();
-        this.ctx.fill()
+        if(playerDeath == false) {
+            this.ctx.beginPath();
+            this.y -= 5;
+            this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+            this.ctx.fillStyle = "black";
+            this.ctx.stroke();
+            this.ctx.fill()
+        }
     }
 }
