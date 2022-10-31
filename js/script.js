@@ -1,8 +1,22 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const shuttle = new Player(ctx, 220, 400, 50, 50, 0, 0, "blue");
-const alien = new Alien(ctx, 220, 80, 50, 50, 2, 0, "red");
+function colorRNG() {
+    letter = "0123456789abcdef";
+    color = "#";
+    for(let i = 0; i < 6; i++) {
+        color += letter[Math.floor(Math.random()*16)]
+    }
+    return color;
+}
+
+const shuttle = new Player(ctx, 220, 400, 50, 50);
+const aliens = [
+    alien = new Alien(ctx, 75, 70, 50, 50, 5000, colorRNG()),
+    alien = new Alien(ctx, 175, 70, 50, 50, 10000, colorRNG()),
+    alien = new Alien(ctx, 275, 70, 50, 50, 15000, colorRNG()),
+    alien = new Alien(ctx, 375, 70, 50, 50, 20000, colorRNG()),
+];
 const bullets = [];
 
 function clear() {

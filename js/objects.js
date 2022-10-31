@@ -1,21 +1,10 @@
 class Player {
-    constructor(ctx, x, y, w, h, dirX, dirY, fill) {
+    constructor(ctx, x, y, w, h) {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.dirX = dirX;
-        this.dirY = dirY;
-        this.fill = fill;
-    }
-
-    draw() {
-        this.ctx.beginPath();
-        this.ctx.rect(this.x, this.y, this.w, this.h);
-        this.ctx.fillStyle = this.fill;
-        this.ctx.stroke();
-        this.ctx.fill()
     }
 
     moveRight() {
@@ -30,6 +19,14 @@ class Player {
     moveDown() {
         this.y += 20;
     }
+    
+    draw() {
+        this.ctx.beginPath();
+        this.ctx.rect(this.x, this.y, this.w, this.h);
+        this.ctx.fillStyle = "green";
+        this.ctx.stroke();
+        this.ctx.fill()
+    }
 
     borderCollision(w, h) {
         if((this.x + this.w) >= w) this.x -= 10;
@@ -37,21 +34,16 @@ class Player {
         if((this.y + this.h) >= h) this.y -= 10;
         if(this.y <= 0) this.y += 10;
     }
-
-    move() {
-        this.x += this.dirX;
-    }
 }
 
 class Alien {
-    constructor(ctx, x, y, w, h, dirX, dirY, fill) {
+    constructor(ctx, x, y, w, h, timeStamp, fill) {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.dirX = dirX;
-        this.dirY = dirY;
+        this.timeStamp = timeStamp;
         this.fill = fill;
     }
 
