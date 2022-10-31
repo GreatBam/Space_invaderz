@@ -1,6 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let playerDeath = false;
+let alienDeath = false;
 
 function colorRNG() {
     letter = "0123456789abcdef";
@@ -65,6 +66,7 @@ function gameLoop() {
         player.hitByAlien(alien);
         for(let ammo of bullets) {
             ammo.draw();
+            alien.hitByBullet(ammo);
         }
     }
         window.requestAnimationFrame(gameLoop);

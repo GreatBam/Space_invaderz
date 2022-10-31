@@ -61,6 +61,8 @@ class Alien {
     }
 
     draw() {
+        if(alienDeath == true) return
+
         this.ctx.beginPath();
         this.ctx.rect(this.x, this.y, this.w, this.h);
         this.ctx.fillStyle = this.fill;
@@ -72,6 +74,17 @@ class Alien {
         setInterval(() => {
             this.y += 10;
         }, this.timeStamp);
+    }
+
+    hitByBullet(bullet) {
+        if(
+            (bullet.x - bullet.r) < (this.x + this.w) &&
+            (bullet.x + bullet.r) > this.x &&
+            (bullet.y + bullet.r) < (this.y + this.h) &&
+            (bullet.y + bullet.r) > this.y
+        ) {
+            alienDeath = true;
+        }
     }
 }
 
