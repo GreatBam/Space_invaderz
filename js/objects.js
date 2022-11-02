@@ -62,11 +62,10 @@ class Alien {
     }
 
     draw() {
-        // if(alienDeath == true) return
-
         this.ctx.beginPath();
         this.ctx.rect(this.x, this.y, this.w, this.h);
         this.ctx.fillStyle = this.fill;
+        this.strokStyle = "black";
         this.ctx.stroke();
         this.ctx.fill()
     }
@@ -85,7 +84,6 @@ class Alien {
             (bullet.y + bullet.r) > this.y
         ) {
             this.alienDeath += 1;
-            console.log("hit")
         }
     }
 

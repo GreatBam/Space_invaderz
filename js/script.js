@@ -70,6 +70,5 @@ function gameLoop() {
         }
     }
     aliens = aliens.filter(alien => alien.killed() == 0);
-    console.log(aliens);
         window.requestAnimationFrame(gameLoop);
 }
