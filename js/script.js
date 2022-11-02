@@ -13,11 +13,11 @@ function colorRNG() {
 }
 
 const player = new Player(ctx, 220, 400, 50, 50);
-const aliens = [
-    alien = new Alien(ctx, 75, 70, 50, 50, 5000, colorRNG()),
-    alien = new Alien(ctx, 175, 70, 50, 50, 10000, colorRNG()),
-    alien = new Alien(ctx, 275, 70, 50, 50, 15000, colorRNG()),
-    alien = new Alien(ctx, 375, 70, 50, 50, 20000, colorRNG()),
+let aliens = [
+    alien = new Alien(ctx, 75, 70, 50, 50, 5000, colorRNG(), 0),
+    alien = new Alien(ctx, 175, 70, 50, 50, 10000, colorRNG(), 0),
+    alien = new Alien(ctx, 275, 70, 50, 50, 15000, colorRNG(), 0),
+    alien = new Alien(ctx, 375, 70, 50, 50, 20000, colorRNG(), 0),
 ];
 const bullets = [];
 
@@ -69,5 +69,7 @@ function gameLoop() {
             alien.hitByBullet(ammo);
         }
     }
+    aliens = aliens.filter(alien => alien.killed() == 0);
+    console.log(aliens);
         window.requestAnimationFrame(gameLoop);
 }

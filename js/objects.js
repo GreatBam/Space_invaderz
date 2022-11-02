@@ -50,7 +50,7 @@ class Player {
 }
 
 class Alien {
-    constructor(ctx, x, y, w, h, timeStamp, fill) {
+    constructor(ctx, x, y, w, h, timeStamp, fill, alienDeath) {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
@@ -58,10 +58,11 @@ class Alien {
         this.h = h;
         this.timeStamp = timeStamp;
         this.fill = fill;
+        this.alienDeath = alienDeath;
     }
 
     draw() {
-        if(alienDeath == true) return
+        // if(alienDeath == true) return
 
         this.ctx.beginPath();
         this.ctx.rect(this.x, this.y, this.w, this.h);
@@ -83,8 +84,14 @@ class Alien {
             (bullet.y + bullet.r) < (this.y + this.h) &&
             (bullet.y + bullet.r) > this.y
         ) {
-            alienDeath = true;
+            this.alienDeath += 1;
+            console.log("hit")
         }
+    }
+
+    killed() {
+        this.alienDeath = this.alienDeath;
+        return this.alienDeath
     }
 }
 
