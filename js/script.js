@@ -77,7 +77,9 @@ function gameLoop() {
         ammo.draw();
         for(let alien of aliens) {
             alien.draw();
-            alien.move();
+            alien.lateralMove();
+            alien.fall();
+            alien.borderCollision(canvas.width, canvas.height);
             player.hitByAlien(alien);
             alien.hitByBullet(ammo);
         }

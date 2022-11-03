@@ -59,6 +59,8 @@ class Alien {
         this.timeStamp = timeStamp;
         this.fill = fill;
         this.alienDeath = alienDeath;
+        this.dirX = 5;
+        this.dirY = 5;
     }
 
     draw() {
@@ -70,10 +72,15 @@ class Alien {
         this.ctx.fill()
     }
 
-    move() {
+    fall() {
         setInterval(() => {
+            this.x -= this.dirX;
             this.y += 10;
         }, this.timeStamp);
+    }
+
+    lateralMove() {
+        this.x += this.dirX;
     }
 
     hitByBullet(bullet) {
@@ -89,6 +96,11 @@ class Alien {
 
     killed() {
         return this.alienDeath
+    }
+
+    borderCollision(w, h) {
+        if((this.x + this.w) >= w) this.dirX = -this.dirX;
+        if(this.x <= 0) this.dirX = -this.dirX;
     }
 }
 
