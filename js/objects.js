@@ -83,12 +83,11 @@ class Alien {
             (bullet.y + bullet.r) < (this.y + this.h) &&
             (bullet.y + bullet.r) > this.y
         ) {
-            this.alienDeath += 1;
+            this.alienDeath = true;
         }
     }
 
     killed() {
-        this.alienDeath = this.alienDeath;
         return this.alienDeath
     }
 }
