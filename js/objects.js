@@ -103,7 +103,7 @@ class Bullet {
     draw() {
         if(playerDeath == false) {
             this.ctx.beginPath();
-            this.y -= 5;
+            this.y -= 10;
             this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
             this.ctx.fillStyle = "black";
             this.ctx.stroke();
