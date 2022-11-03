@@ -2,6 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let playerDeath = false;
 let alienDeath = false;
+const timeArray = [5000, 10000, 15000, 20000];
 
 function colorRNG() {
     letter = "0123456789abcdef";
@@ -12,13 +13,23 @@ function colorRNG() {
     return color;
 }
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+shuffleArray(timeArray);
+console.log(timeArray);
+
 const player = new Player(ctx, 220, 400, 50, 50);
 const bullets = [];
 let aliens = [
-    alien = new Alien(ctx, 75, 70, 50, 50, 5000, colorRNG(), false),
-    alien = new Alien(ctx, 175, 70, 50, 50, 10000, colorRNG(), false),
-    alien = new Alien(ctx, 275, 70, 50, 50, 15000, colorRNG(), false),
-    alien = new Alien(ctx, 375, 70, 50, 50, 20000, colorRNG(), false),
+    alien = new Alien(ctx, 75, 70, 50, 50, timeArray[0], colorRNG(), false),
+    alien = new Alien(ctx, 175, 70, 50, 50, timeArray[1], colorRNG(), false),
+    alien = new Alien(ctx, 275, 70, 50, 50, timeArray[2], colorRNG(), false),
+    alien = new Alien(ctx, 375, 70, 50, 50, timeArray[3], colorRNG(), false),
 ];
 let bullet = new Bullet(ctx, 0, 0, 7);
 bullets.push(bullet);
