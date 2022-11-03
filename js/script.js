@@ -13,13 +13,15 @@ function colorRNG() {
 }
 
 const player = new Player(ctx, 220, 400, 50, 50);
+const bullets = [];
 let aliens = [
     alien = new Alien(ctx, 75, 70, 50, 50, 5000, colorRNG(), 0),
     alien = new Alien(ctx, 175, 70, 50, 50, 10000, colorRNG(), 0),
     alien = new Alien(ctx, 275, 70, 50, 50, 15000, colorRNG(), 0),
     alien = new Alien(ctx, 375, 70, 50, 50, 20000, colorRNG(), 0),
 ];
-const bullets = [];
+let bullet = new Bullet(ctx, 0, 0, 7);
+bullets.push(bullet);
 
 function clear() {
     ctx.beginPath();
@@ -47,7 +49,7 @@ function playerControl(e) {
         case 32:
             let bulletx = (player.x + (player.w / 2));
             let bullety = player.y - 7;
-            const bullet = new Bullet(ctx, bulletx, bullety, 7);
+            let bullet = new Bullet(ctx, bulletx, bullety, 7);
             bullets.push(bullet);
             break;
     }
@@ -60,12 +62,12 @@ function gameLoop() {
     window.addEventListener("keydown", playerControl, false);
     player.draw();
     player.borderCollision(canvas.width, canvas.height);
-    for(let alien of aliens) {
-        alien.draw();
-        alien.move();
-        player.hitByAlien(alien);
-        for(let ammo of bullets) {
-            ammo.draw();
+    for(let ammo of bullets) {
+        ammo.draw();
+        for(let alien of aliens) {
+            alien.draw();
+            alien.move();
+            player.hitByAlien(alien);
             alien.hitByBullet(ammo);
         }
     }
