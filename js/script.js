@@ -4,6 +4,7 @@ let playerDeath = false;
 let alienDeath = false;
 const timeArray = [5000, 10000, 15000, 20000];
 
+// Color RNG
 function colorRNG() {
     letter = "0123456789abcdef";
     color = "#";
