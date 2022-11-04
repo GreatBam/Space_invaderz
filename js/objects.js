@@ -61,6 +61,7 @@ class Alien {
         this.alienDeath = alienDeath;
         this.dirX = 5;
         this.dirY = 5;
+        this.ySpeed = Math.random() > 0.5 ? 1 : 2;
     }
 
     draw() {
@@ -74,9 +75,13 @@ class Alien {
 
     fall() {
         setInterval(() => {
-            this.x -= this.dirX;
+            // this.x -= this.dirX;
             this.y += 10;
         }, this.timeStamp);
+    }
+
+    goDown() {
+        this.y += this.ySpeed;
     }
 
     lateralMove() {

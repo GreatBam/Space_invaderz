@@ -20,17 +20,16 @@ function shuffleArray(array) {
     }
 }
 
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 shuffleArray(timeArray);
 console.log(timeArray);
 
 const player = new Player(ctx, 220, 400, 50, 50);
 const bullets = [];
-let aliens = [
-    alien = new Alien(ctx, 75, 70, 50, 50, timeArray[0], colorRNG(), false),
-    alien = new Alien(ctx, 175, 70, 50, 50, timeArray[1], colorRNG(), false),
-    alien = new Alien(ctx, 275, 70, 50, 50, timeArray[2], colorRNG(), false),
-    alien = new Alien(ctx, 375, 70, 50, 50, timeArray[3], colorRNG(), false),
-];
+let aliens = [];
 let bullet = new Bullet(ctx, 0, 0, 7);
 bullets.push(bullet);
 
@@ -70,15 +69,26 @@ window.requestAnimationFrame(gameLoop);
 
 function gameLoop() {
     clear();
+
+    if (Math.random() > 0.985) {
+        const alien = new Alien(ctx, randomInteger(0, canvas.width - 50), -50, 50, 50, timeArray[0], colorRNG(), false)
+        aliens.push(alien)
+    }
+
     window.addEventListener("keydown", playerControl, false);
     player.draw();
     player.borderCollision(canvas.width, canvas.height);
+
+    for (const alien of aliens) {
+        alien.goDown()
+    }
+
     for(let ammo of bullets) {
         ammo.draw();
         for(let alien of aliens) {
             alien.draw();
-            alien.lateralMove();
-            alien.fall();
+            // alien.lateralMove();
+            // alien.fall();
             alien.borderCollision(canvas.width, canvas.height);
             player.hitByAlien(alien);
             alien.hitByBullet(ammo);
