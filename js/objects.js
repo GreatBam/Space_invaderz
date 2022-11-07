@@ -72,11 +72,14 @@ class Alien {
         this.ctx.fill()
     }
 
-    fall() {
+    fall(h) {
         setInterval(() => {
             this.x -= this.dirX;
             this.y += 10;
         }, this.timeStamp);
+        if((this.y + this.h) > h) {
+            this.alienDeath = true;
+        }
     }
 
     lateralMove() {
@@ -99,7 +102,7 @@ class Alien {
     }
 
     borderCollision(w, aliens) {
-        for(let i = 0; i < 4; i++) {
+        for(let i = 0; i < aliens.length; i++) {
             if((this.x + this.w) >= w) {
                 aliens[i].dirX = -(aliens[i].dirX);
             }
