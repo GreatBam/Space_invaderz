@@ -98,9 +98,20 @@ class Alien {
         return this.alienDeath
     }
 
-    borderCollision(w, h) {
-        if((this.x + this.w) >= w) this.dirX = -this.dirX;
-        if(this.x <= 0) this.dirX = -this.dirX;
+    borderCollision(w, aliens) {
+        // console.log(aliens);
+        if((aliens[3].x + aliens[3].w) >= w) {
+            for(let i = 0; i < 4; i++) {
+                console.log("hit");
+                aliens[i].dirX = -(aliens[i].dirX);
+            }
+        }
+        if(aliens[0].x <= 0) {
+            for(let i = 0; i < 4; i++) {
+                aliens[i].dirX = -(aliens[i].dirX);
+            }
+        }
+
     }
 }
 

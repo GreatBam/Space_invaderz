@@ -80,9 +80,10 @@ function gameLoop() {
             alien.draw();
             alien.lateralMove();
             alien.fall();
-            alien.borderCollision(canvas.width, canvas.height);
+            alien.borderCollision(canvas.width, aliens);
             player.hitByAlien(alien);
             alien.hitByBullet(ammo);
+            // console.log(aliens[1]);
         }
     }
     aliens = aliens.filter(alien => alien.killed() == false);
