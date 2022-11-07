@@ -22,7 +22,6 @@ function shuffleArray(array) {
 }
 
 shuffleArray(timeArray);
-console.log(timeArray);
 
 const player = new Player(ctx, 220, 400, 50, 50);
 const bullets = [];
@@ -67,21 +66,6 @@ function playerControl(e) {
     }
 }
 
-// function borderCollision(w, aliens) {
-//     if((aliens[3].x + aliens[3].w) >= w) {
-//         for(let i = 0; i < 4; i++) {
-//             aliens[i].dirX = -(aliens[i].dirX);
-//             console.log(i);
-//         }
-//     }
-//     if (aliens[0].x <= 0) {
-//         for(let i = 0; i < 4; i++) {
-//             aliens[i].dirX = -(aliens[i].dirX);
-//         }
-//     }
-// }
-
-
 window.requestAnimationFrame(gameLoop);
 
 function gameLoop() {
@@ -98,7 +82,6 @@ function gameLoop() {
             alien.borderCollision(canvas.width, aliens);
             player.hitByAlien(alien);
             alien.hitByBullet(ammo);
-            // console.log(aliens[1]);
         }
     }
     aliens = aliens.filter(alien => alien.killed() == false);
