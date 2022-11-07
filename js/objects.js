@@ -99,19 +99,14 @@ class Alien {
     }
 
     borderCollision(w, aliens) {
-        // console.log(aliens);
-        if((aliens[3].x + aliens[3].w) >= w) {
-            for(let i = 0; i < 4; i++) {
-                console.log("hit");
+        for(let i = 0; i < 4; i++) {
+            if((this.x + this.w) >= w) {
                 aliens[i].dirX = -(aliens[i].dirX);
             }
-        }
-        if(aliens[0].x <= 0) {
-            for(let i = 0; i < 4; i++) {
-                aliens[i].dirX = -(aliens[i].dirX);
+            if (this.x <= 0) {
+                    aliens[i].dirX = -(aliens[i].dirX);
             }
         }
-
     }
 }
 

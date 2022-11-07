@@ -67,6 +67,21 @@ function playerControl(e) {
     }
 }
 
+// function borderCollision(w, aliens) {
+//     if((aliens[3].x + aliens[3].w) >= w) {
+//         for(let i = 0; i < 4; i++) {
+//             aliens[i].dirX = -(aliens[i].dirX);
+//             console.log(i);
+//         }
+//     }
+//     if (aliens[0].x <= 0) {
+//         for(let i = 0; i < 4; i++) {
+//             aliens[i].dirX = -(aliens[i].dirX);
+//         }
+//     }
+// }
+
+
 window.requestAnimationFrame(gameLoop);
 
 function gameLoop() {
