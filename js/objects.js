@@ -74,7 +74,7 @@ class Alien {
 
     fall(h) {
         setInterval(() => {
-            this.x -= this.dirX;
+            this.dirX = 0;
             this.y += 10;
         }, this.timeStamp);
         if((this.y + this.h) > h) {
@@ -107,7 +107,7 @@ class Alien {
                 aliens[i].dirX = -(aliens[i].dirX);
             }
             if (this.x <= 0) {
-                    aliens[i].dirX = -(aliens[i].dirX);
+                aliens[i].dirX = -(aliens[i].dirX);
             }
         }
     }
